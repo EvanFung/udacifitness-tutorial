@@ -11,7 +11,9 @@ import UdaciSteppers from "./UdaciStepper"
 import {
   getMetricMetaInfo,
   timeToString,
-  getDailyReminderValue
+  getDailyReminderValue,
+  clearLocalNotification,
+  setLocalNotification
 } from "../utils/helpers"
 import DateHeader from "./DateHeader"
 import { Ionicons } from "@expo/vector-icons"
@@ -21,6 +23,7 @@ import { connect } from "react-redux"
 import { addEntry } from "../actions"
 import { white, purple } from "../utils/colors"
 import { NavigationActions } from "react-navigation"
+
 function SubmitBtn({ onPress }) {
   return (
     <TouchableOpacity
@@ -84,6 +87,7 @@ class AddEntry extends Component {
     //Save to 'DB'
     submitEntry({ key, entry })
     //Clean local notification
+    clearLocalNotification().then(setLocalNotification)
   }
 
   reset = () => {

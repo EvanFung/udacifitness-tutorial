@@ -21,6 +21,7 @@ import { purple, white } from "./utils/colors"
 import { Constants } from "expo"
 import EntryDetail from "./components/EntryDetail"
 import Live from "./components/Live"
+import { setLocalNotification } from "./utils/helpers";
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -98,6 +99,11 @@ export default class App extends React.Component {
   state = {
     value: 0
   }
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer, devToolsEnhancer())}>
